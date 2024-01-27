@@ -17,5 +17,6 @@ export default {
     mail_user : process.env.MAIL_USER,
     mail_password : process.env.MAIL_PASSWORD,
     mail_from : process.env.MAIL_FROM,
+    host : process.env.HOST || 'http://localhost:8080'
 
 }

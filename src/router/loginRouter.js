@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import config from '../config/config.js';
 
 const router = Router();
 
@@ -6,8 +7,8 @@ router.get('/login', (req, res) => {
   if (req.session.isLogged) {
     return res.redirect('/profile');
   }
-
-  res.render('login');
+  const host = config.host;
+  res.render('login',{host});
 });
 
 
