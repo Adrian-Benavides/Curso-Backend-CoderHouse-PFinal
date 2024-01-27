@@ -4,7 +4,7 @@
         Bienvenido {{first_name}} {{last_name}}
     </div>
     <div>
-        <form action="http://localhost:8080/api/session/logout", method="GET">
+        <form action="{{host}}/api/session/logout", method="GET">
             <button value="submit">Logout</button>
         </form>
     </div>
@@ -40,7 +40,7 @@
                         <td>{{this.thumbnails}}</td>
                         <td> 
                             
-                                <button id="agregar" onclick="agregar('http://localhost:8080/api/carts/{{../cartId}}/product/{{this._id}}')">Agregar al carrito</button>                                                   
+                                <button id="agregar" onclick="agregar('{{../host}}/api/carts/{{../cartId}}/product/{{this._id}}')">Agregar al carrito</button>                                                   
                             
                         </td>
                     </tr>
@@ -60,5 +60,5 @@
     </div>
 </div>
 </div>
-<a href="http://localhost:8080/cart/{{cartId}}">ver carro</a>
+<a href="{{host}}/cart/{{cartId}}">ver carro</a>
 <script src="/js/cart.js"></script>

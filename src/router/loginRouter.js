@@ -18,7 +18,8 @@ router.get('/signup', (req, res) => {
     return res.redirect('/profile');
   }
 
-  res.render('signup');
+  const host = config.host;
+  res.render('signup',{host});
 });
 
 router.get('/profile', (req, res) => {
@@ -27,7 +28,9 @@ router.get('/profile', (req, res) => {
   }
 
   const { username, email } = req.session;
-  res.render('profile', { username, email });
+  
+  const host = config.host;
+  res.render('profile', { username, email,host });
 });
 
 export default router;

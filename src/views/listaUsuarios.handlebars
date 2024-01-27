@@ -4,7 +4,7 @@
         Bienvenido {{first_name}} {{last_name}}
     </div>
     <div>
-        <form action="http://localhost:8080/api/session/logout", method="GET">
+        <form action="{{host}}/api/session/logout", method="GET">
             <button value="submit">Logout</button>
         </form>
     </div>
@@ -28,8 +28,8 @@
                         <td>{{this.role}}</td>
                         <td> 
                             
-                                <button id="Eliminar" onclick="eliminar('{{this.email}}')">Eliminar Usuario</button>   
-                                <button id="RoleUpdate" onclick="premium('{{this.id}}')">Premium</button>                                                
+                                <button id="Eliminar" onclick="eliminar('{{host}}','{{this.email}}')">Eliminar Usuario</button>   
+                                <button id="RoleUpdate" onclick="premium('{{host}}','{{this.id}}')">Premium</button>                                                
                             
                         </td>
                     </tr>

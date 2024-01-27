@@ -27,11 +27,11 @@
     
 </div>
 </div>
-<a href="http://localhost:8080/products">volver</a>
+<a href="{{host}}/products">volver</a>
 <br>
 <br>
  <div>
-    <button id="comprar" onclick="comprar('{{cart._id}}')">Comprar</button> 
+    <button id="comprar" onclick="comprar('{{host}}','{{cart._id}}')">Comprar</button> 
 </div>
 
 <script src="/js/cart.js"></script>

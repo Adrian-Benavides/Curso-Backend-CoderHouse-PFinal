@@ -1,11 +1,11 @@
 
-async function eliminar(email){
+async function eliminar(host,email){
 
-    fetch(`http://localhost:8080/api/users/${email}`, {
+    fetch(`${host}/api/users/${email}`, {
         method: 'delete',        
     }).then( response => {
         if(response.status == '200'){
-            window.location = `http://localhost:8080/users`
+            window.location = `${host}/users`
         }else {
             // Si la respuesta es un error (código 400), maneja el mensaje de error
             response.json().then(errorResponse => {
@@ -18,13 +18,13 @@ async function eliminar(email){
 
 }
 
-async function premium(idUser){
+async function premium(host,idUser){
 
-    fetch(`http://localhost:8080/api/users/premium/${idUser}`, {
+    fetch(`${host}/api/users/premium/${idUser}`, {
         method: 'PUT',        
     }).then( response => {
         if(response.status == '200'){
-            window.location = `http://localhost:8080/users`
+            window.location = `${host}/users`
         }else {
             // Si la respuesta es un error (código 400), maneja el mensaje de error
             response.json().then(errorResponse => {
@@ -40,7 +40,7 @@ async function premium(idUser){
 
 function logout(){
 
-    fetch('http://localhost:8080/logout', {
+    fetch(`${host}/logout`, {
         method: 'GET',
     });
 

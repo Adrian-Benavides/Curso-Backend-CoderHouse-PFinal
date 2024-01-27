@@ -1,5 +1,7 @@
 import { productoModel } from "../dao/models/producto.model.js";
 
+import config from '../config/config.js';
+
 export default class ProductRepository{
     
     async addProduct(data){
@@ -29,8 +31,8 @@ export default class ProductRepository{
             page: products.page,
             hasPrevPage: products.hasPrevPage,
             hasNextPage: products.hasNextPage,
-            prevLink: products.hasPrevPage?  `http://localhost:8080/products?limit=${pLimit}&page=${ products.prevPage}&sort=${pSort}&query=${pQuery}` : null,
-            nextLink: products.hasNextPage?  `http://localhost:8080/products?limit=${pLimit}&page=${ products.nextPage}&sort=${pSort}&query=${pQuery}` : null,
+            prevLink: products.hasPrevPage?  `${config.host}/products?limit=${pLimit}&page=${ products.prevPage}&sort=${pSort}&query=${pQuery}` : null,
+            nextLink: products.hasNextPage?  `${config.host}/products?limit=${pLimit}&page=${ products.nextPage}&sort=${pSort}&query=${pQuery}` : null,
 
         }
 

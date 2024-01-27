@@ -9,6 +9,7 @@ const router = Router();
 router.get('/', async (req, res) =>{
     req.context.socketServer.emit();
     const products = await productManager.getProducts();
+
     res.render('realTimeProducts', {products});
 });
 

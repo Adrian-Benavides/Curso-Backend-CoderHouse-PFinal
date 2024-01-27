@@ -7,6 +7,7 @@ import isNotLogged from '../middlewares/isNotLogged.js';
 import EmailService from "../service/mail.service.js";
 import isAdminGlobal from '../middlewares/isAdmingGlobal.js';
 import jwt from 'jsonwebtoken';
+import config from '../config/config.js';
 
 const emailService =  new EmailService();
 
@@ -19,7 +20,9 @@ const router = Router();
 
 router.get('/', async (req, res) =>{
     const products = await productManager.getProducts();
-    res.render('home', {products});
+    
+    const host = config.host;
+    res.render('home', {products,host});
 });
 
 
@@ -44,7 +47,9 @@ router.get('/products',isNotLogged, async (req, res) =>{
     if(role === 'user'){
         isUser = true;
     }
-    res.render('listaProductos', {products,cartId,first_name, last_name,role,isUser});
+    
+    const host = config.host;
+    res.render('listaProductos', {products,cartId,first_name, last_name,role,isUser,host});
 });
 
 
@@ -55,7 +60,8 @@ router.get('/users',isNotLogged,isAdminGlobal, async (req, res) =>{
     const usuarios = await usuariosManager.getAllUsers();
     const {first_name,last_name} = req.session;
     
-    res.render('listaUsuarios', {usuarios,first_name,last_name});
+    const host = config.host;
+    res.render('listaUsuarios', {usuarios,first_name,last_name,host});
 });
 
 
@@ -67,38 +73,49 @@ router.get('/cart/:cid', async (req, res) =>{
         _id : response[0]._id,
         products : response[0].products
     };
-    res.render('carrito', {cart});
+    
+    const host = config.host;
+    res.render('carrito', {cart,host});
 });
 
 
 router.get('/login',isLogged, (req, res) => {
-    res.render('login');
+    const host = config.host;
+    res.render('login',{host});
 });
 
-router.get('/signup',isLogged, (req, res) => {
-    res.render('signup');
+router.get('/signup',isLogged, (req, res) => 
+{
+    
+    const host = config.host;
+    res.render('signup',{host});
 });
 router.get('/RecuperarPass',isLogged, (req, res) => {
-    res.render('RecuperarPass');
+    
+    const host = config.host;
+    res.render('RecuperarPass',{host});
 });
 
 router.get('/RestablecerPass',isLogged, async (req, res) => {
    const token = cookieExtractor(req);
 
+   const host = config.host;
    const decoded = jwt.verify(token, '4Np)=advb(85/Bb!+');
     const email = decoded.email; 
    const text = ``;
-   const html = `<a href="http://localhost:8080/recuperarPassByEmail/${token}">Restableces contraseña</a>`;
+   const html = `<a href="${host}/recuperarPassByEmail/${token}">Restableces contraseña</a>`;
    const title = 'Restablecer password';
    await emailService.sendEmail(email,title,text,html);
-    res.render('login');
+    res.render('login',{host});
 });
 
 
 router.get('/recuperarPassByEmail/:token',isLogged, (req, res) => {
     const token = req.params.token;
      const error =  false;
-     res.render('restablecerPass', {token,error});
+     
+    const host = config.host;
+     res.render('restablecerPass', {token,error,host});
  });
 
 const cookieExtractor = (req) => {

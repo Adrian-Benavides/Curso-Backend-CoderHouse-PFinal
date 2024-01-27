@@ -7,20 +7,20 @@ async function agregar(link){
 
 }
 
-async function comprar(idcart){
+async function comprar(host,idcart){
 
-    fetch(`http://localhost:8080/api/carts/${idcart}/purchase`, {
+    fetch(`${host}/api/carts/${idcart}/purchase`, {
         method: 'PUT',        
     }).then(response => {
-        window.location = `http://localhost:8080/products`
+        window.location = `${host}/products`
     });
    
 }
 
 
-function logout(){
+function logout(host){
 
-    fetch('http://localhost:8080/logout', {
+    fetch(`${host}/logout`, {
         method: 'GET',
     });
 

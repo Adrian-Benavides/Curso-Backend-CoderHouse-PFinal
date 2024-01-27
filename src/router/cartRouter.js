@@ -16,7 +16,7 @@ router.post('/',async (req,res,next) =>{
     }
 });
 
-router.post('/:cid/product/:pid',isUser,async (req,res,next) =>{
+router.post('/:cid/product/:pid',async (req,res,next) =>{
     try{ 
         const cid = req.params.cid;        
         const pid =req.params.pid;

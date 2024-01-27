@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { userModel } from '../dao/models/user.model.js';
 import UserManager from '../dao/db/UserManager.js'
+import config from '../config/config.js';
 
 import isLogged from '../middlewares/isLogged.js';
 import passport from 'passport';
@@ -29,7 +30,9 @@ sessionRouter.post('/login',isLogged,
       isAdmin = true;
     }
     const usermane = req.session.first_name;
-    res.render('menu', { isAdmin,usermane});
+    
+    const host = config.host;
+    res.render('menu', { isAdmin,usermane,host});
     //res.redirect('/products');
 });
 
@@ -61,7 +64,8 @@ sessionRouter.get(
   '/githubcallback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function (req, res) {
-    req.session.user = req.user;    
+    req.session.user = req.user.first_name;      
+    req.session.cart = req.user.cart;  
     req.session.isLogged = true;
     res.redirect('/products');
   }
@@ -134,7 +138,9 @@ sessionRouter.post('/restablecerpass/:token',async (req, res,next) =>{
         if(resp == -1){
           // si el cliente usa la misma password
           const error = true;
-          res.render('restablecerPass', {token,error});
+          
+          const host = config.host;
+          res.render('restablecerPass', {token,error,host});
           return;
         }
         if(!resp){
